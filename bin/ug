@@ -1,0 +1,17 @@
+#!/bin/sh
+dir=$(dirname $0)
+
+if [ "$1" = "" ]; then
+  exec $dir/usagit-help
+fi
+
+subcmd=$1
+shift 1
+cmd=$dir/usagit-$subcmd
+
+if [ -x $cmd ]; then
+  exec $cmd $*
+fi
+
+echo "$0: unknown subcommand '$subcmd'"
+$dir/usagit-help
